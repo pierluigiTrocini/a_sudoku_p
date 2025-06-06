@@ -1,0 +1,55 @@
+dim(1..9).
+
+solution(X, Y, Value) | notSolution(X, Y, Value) :- dim(X), dim(Y), dim(Value).
+
+:- solution(X, Y, _), cell(X, Y, _).
+:- solution(X, Y, V1), solution(X, Y, V2), V1 <> V2.
+
+n_solution(N) :- N = #count{X, Y : solution(X, Y, _)}.
+n_cells(N) :- N = #count{X, Y : cell(X, Y, _)}.
+
+:- n_solution(Sol), n_cells(Cells), Sol <> 81 - Cells.
+
+:- solution(X, Y1, V), solution(X, Y2, V), Y1 <> Y2.
+:- solution(X, Y1, V), cell(X, Y2, V), Y1 <> Y2.
+
+:- solution(X1, Y, V), solution(X2, Y, V), X1 <> X2.
+:- solution(X1, Y, V), cell(X2, Y, V), X1 <> X2.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 1, X1 <= 3, X2 >= 1, X2 <= 3,
+    Y1 <> Y2, Y1 >= 1, Y1 <= 3, Y2 >= 1, Y2 <= 3.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 1, X1 <= 3, X2 >= 1, X2 <= 3,
+    Y1 <> Y2, Y1 >= 4, Y1 <= 6, Y2 >= 4, Y2 <= 6.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 1, X1 <= 3, X2 >= 1, X2 <= 3,
+    Y1 <> Y2, Y1 >= 7, Y1 <= 9, Y2 >= 7, Y2 <= 9.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 4, X1 <= 6, X2 >= 4, X2 <= 6,
+    Y1 <> Y2, Y1 >= 1, Y1 <= 3, Y2 >= 1, Y2 <= 3.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 4, X1 <= 6, X2 >= 4, X2 <= 6,
+    Y1 <> Y2, Y1 >= 4, Y1 <= 6, Y2 >= 4, Y2 <= 6.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 4, X1 <= 6, X2 >= 4, X2 <= 6,
+    Y1 <> Y2, Y1 >= 7, Y1 <= 9, Y2 >= 7, Y2 <= 9.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 7, X1 <= 9, X2 >= 7, X2 <= 9,
+    Y1 <> Y2, Y1 >= 1, Y1 <= 3, Y2 >= 1, Y2 <= 3.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 7, X1 <= 9, X2 >= 7, X2 <= 9,
+    Y1 <> Y2, Y1 >= 4, Y1 <= 6, Y2 >= 4, Y2 <= 6.
+
+:- solution(X1, Y1, V), solution(X2, Y2, V),
+    X1 <> X2, X1 >= 7, X1 <= 9, X2 >= 7, X2 <= 9,
+    Y1 <> Y2, Y1 >= 7, Y1 <= 9, Y2 >= 7, Y2 <= 9.
+
+#show solution/3.
